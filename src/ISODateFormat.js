@@ -30,15 +30,25 @@ var ISODateFormat = (function () {
 			yyyy = ~~match[1];
 			MM = ~~match[2];
 			dd = ~~match[3];
+			
 			if (match[4]) {
-				hour = ~~match[4];
-				min = ~~match[5];
-				match[6] && (sec = ~~match[6]);
+				if (this.type != Type.dateTime) {
+					return null;
+				}
+				else {
+					hour = ~~match[4];
+					min = ~~match[5];
+					match[6] && (sec = ~~match[6]);
+				}
+			}
+			else if (this.type != Type.date) {
+				return null;
 			}
 			date = new Date(yyyy, MM-1, dd, hour, min, sec);
 			if (date.getFullYear()!==yyyy || date.getMonth()!==(MM-1) || date.getDate()!==dd) {
-				date = null;
+					date = null;
 			}
+
 		}
 		return date;
 	}
