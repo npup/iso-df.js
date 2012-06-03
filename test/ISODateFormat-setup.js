@@ -22,6 +22,10 @@ TestCase("setup", {
 				fail("Module API should not expose anything called '"+exposed+"' (type "+(typeof ISODateFormat[exposed])+")");
 			}
 		}
-	}	
+	}
+	
+	, "testModuleFactoryMethod": function () {
+		assertObject("ISODateFormat.create should return an object", ISODateFormat.create());
+	}
 
 });
