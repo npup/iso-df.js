@@ -30,6 +30,15 @@ TestCase("setup", {
 		var formatter = ISODateFormat.create(ISODateFormat.date);
 		assertFunction("formatter object should have a function 'parse'", formatter.parse);
 		assertFunction("formatter object should have a function 'format'", formatter.format);
+		
+		formatter = ISODateFormat.create(ISODateFormat.date);
+		assertEquals("formatter object should be configured by parameter", ISODateFormat.date, formatter.type);
+		
+		formatter = ISODateFormat.create(ISODateFormat.dateTime);
+		assertEquals("formatter object should be configured by parameter", ISODateFormat.dateTime, formatter.type);
+		
+		formatter = ISODateFormat.create();
+		assertEquals("formatter object should be configured to 'date' when no parameter given", ISODateFormat.date, formatter.type);
 	}
 
 });
