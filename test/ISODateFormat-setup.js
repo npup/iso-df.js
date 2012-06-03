@@ -26,6 +26,10 @@ TestCase("setup", {
 	
 	, "testModuleFactoryMethod": function () {
 		assertObject("ISODateFormat.create should return an object", ISODateFormat.create());
+		
+		var formatter = ISODateFormat.create(ISODateFormat.date);
+		assertFunction("formatter object should have a function 'parse'", formatter.parse);
+		assertFunction("formatter object should have a function 'format'", formatter.format);
 	}
 
 });
