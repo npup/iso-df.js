@@ -11,4 +11,8 @@ TestCase("setup", {
 		assertEquals("dateTime", ISODateFormat.dateTime);
 	}
 
+	, "testModuleExposesFactoryMethod": function () {
+		assertFunction("ISODateFormat should expose a function 'create'", ISODateFormat.create);
+	}
+
 });
