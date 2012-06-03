@@ -1,5 +1,7 @@
 var ISODateFormat = (function () {
 	
+	var isoExpr = /^\s*(\d{4})-([01]\d)-([0123]\d)[T ]?(?:(\d{2}):(\d{2})(?::(\d{2}))?)?\s*$/;
+	
 	function Formatter(type) {
 		(typeof type=="undefined") && (type = Type.date);
 		this.type = type;
@@ -18,9 +20,32 @@ var ISODateFormat = (function () {
 		return str;
 	}
 	
+	function parse(dateStr) {
+		var date = null
+			, match = isoExpr.exec(dateStr);
+		var yyyy, MM, dd, hh, mm
+			, hour=0, min=0, sec=0;
+
+		if (match) {
+			yyyy = ~~match[1];
+			MM = ~~match[2];
+			dd = ~~match[3];
+			if (match[4]) {
+				hour = ~~match[4];
+				min = ~~match[5];
+				match[6] && (sec = ~~match[6]);
+			}
+			date = new Date(yyyy, MM-1, dd, hour, min, sec);
+			if (date.getFullYear()!==yyyy || date.getMonth()!==(MM-1) || date.getDate()!==dd) {
+				date = null;
+			}
+		}
+		return date;
+	}
+
 	Formatter.prototype = {
 		"constructor": Formatter
-		, "parse": function () {}
+		, "parse": parse
 		, "format": format
 	};
 	
