@@ -10,8 +10,7 @@ Usage
 
 ```var f = ISODateFormat.create();
 f.format(new Date()); // yyyy-MM-dd
-f.parse("2012-06-04"); // date obj
-```
+f.parse("2012-06-04"); // date obj```
 
 ```var f2 = ISODateFormat.create(ISODateFormat.dateTime);
 f2.format(new Date()); // yyyy-MM-dd hh:mm
