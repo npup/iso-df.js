@@ -88,6 +88,8 @@ TestCase("parse-dateTime", {
 			, "2012-01-01 19:00:0"
 			, "2010-12-01"
 			, "2012-02-29"
+			, "2012-02-01 25:00"
+			, "2012-02-01 01:60"
 		];
 		for (var idx=0, len = erronous.length; idx<len; ++idx) {
 			assertNull(formatter.parse(erronous[idx]));
