@@ -45,35 +45,51 @@ var isoDateFormat;
   }
 
   function parse(dateStr) {
-    var date = null, match = isoExpr.exec(dateStr)
-      , yyyy, MM, dd, hh, mm
-      , hour=0, min=0, sec=0;
+    var date = null
+      , instance = this, parts = getParts(instance, dateStr);
 
-    if (match) {
-      yyyy = ~~match[1];
-      MM = ~~match[2];
-      dd = ~~match[3];
-      if (match[4]) {
-        if (this.type != Type.dateTime) {return null;}
-        else {
-          hour = ~~match[4];
-          min = ~~match[5];
-          match[6] && (sec = ~~match[6]);
-        }
-      }
-      else if (this.type != Type.date) {return null;}
-      date = new Date(yyyy, MM-1, dd, hour, min, sec);
-      if (date.getFullYear()!==yyyy || date.getMonth()!==(MM-1) || date.getDate()!==dd) {
+    if (parts) {
+      date = new Date(parts.yyyy, parts.MM-1, parts.dd, parts.hour, parts.min, parts.sec);
+      if (date.getFullYear()!==parts.yyyy || date.getMonth()!==(parts.MM-1) || date.getDate()!==parts.dd) {
           return null;
       }
-      else if (this.type == Type.dateTime) {
-        if (date.getHours()!==hour || date.getMinutes()!==min) {
+      else if (instance.type == Type.dateTime) {
+        if (date.getHours()!==parts.hour || date.getMinutes()!==parts.min) {
           return null;
         }
       }
     }
     return date;
   }
+
+
+  function getParts(instance, dateStr) {
+    var match = isoExpr.exec(dateStr)
+      , yyyy, MM, dd
+      , hour = 0, min = 0, sec = 0;
+    if (!match) {return null;}
+    yyyy = ~~match[1];
+    MM = ~~match[2];
+    dd = ~~match[3];
+    if (match[4]) {
+      if (instance.type != Type.dateTime) {return null;}
+      else {
+        hour = ~~match[4];
+        min = ~~match[5];
+        match[6] && (sec = ~~match[6]);
+      }
+    }
+    else if (instance.type != Type.date) {return null;}
+    return {
+      "yyyy": yyyy,
+      "MM": MM,
+      "dd": dd,
+      "hour": hour,
+      "min": min,
+      "sec": sec
+    };
+  }
+
 
   Formatter.prototype = {
     "constructor": Formatter
@@ -99,3 +115,14 @@ var isoDateFormat;
     }
   };
 })());
+
+(function () {
+  var toExport = {"name": "isoDateFormat", "obj": isoDateFormat};
+  (function() {
+    var undefinedType = "undefined";
+    if (undefinedType!=typeof module && undefinedType != typeof module.exports && "function" == typeof require) {
+      exports[this.name] = this.obj;
+    }
+  }).call(toExport);
+})();
+

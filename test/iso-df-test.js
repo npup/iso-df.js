@@ -2,6 +2,9 @@
   undef: false
 */
 
+var buster = require("buster");
+var isoDateFormat = require("../build/iso-df").isoDateFormat;
+
 buster.testCase("iso-df::setup", {
   "isoDateFormat should be defined as an object": function () {
     assert.isObject(isoDateFormat);

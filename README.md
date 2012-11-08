@@ -3,7 +3,13 @@ isoDateFormat
 
 parse/format iso dates/date-times. under construction.
 
-
+Build
+-----
+	targets:
+		`make build`
+		`make min`		# uglifyjs
+		`make lint` 	# jshint
+		`make test` 	# buster.js
 
 Usage
 -----
