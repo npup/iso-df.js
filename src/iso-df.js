@@ -117,12 +117,11 @@ var isoDateFormat;
 })());
 
 (function () {
-  var toExport = {"name": "isoDateFormat", "obj": isoDateFormat};
+  var toExport = {"isoDateFormat": isoDateFormat};
   (function() {
     var undefinedType = "undefined";
     if (undefinedType!=typeof module && undefinedType != typeof module.exports && "function" == typeof require) {
-      exports[this.name] = this.obj;
+      for (var name in this) {exports[name] = this[name];}
     }
   }).call(toExport);
 })();
-
