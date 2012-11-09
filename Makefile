@@ -1,16 +1,45 @@
 #!/bin/bash
 SRC = src/iso-df.js
 
-all: min
+FILE = iso-df.js
+FILE_MIN = iso-df.min.js
 
-lint:
-	jshint --config .jshint-conf src/*.js
+DIST_DIR = ./build
+DIST_FILE = ${DIST_DIR}/${FILE}
+DIST_FILE_MIN = ${DIST_DIR}/${FILE_MIN}
 
-build: ${SRC}
-	cat ${SRC} > ./build/iso-df.js
+TEST_DIR = ./test
+TEST_FILES = ${TEST_DIR}/iso-df-test.js
 
-min: build
-	uglifyjs build/iso-df.js > build/iso-df.min.js
+#target: all - clean, build and minify
+all: clean min
 
-test: build
-	node test/iso-df-test.js
+#target: dist - build
+dist: ${SRC}
+	@cat ${SRC} > ${DIST_FILE}
+	@echo 'target:' $@', building from:' ${SRC}
+
+#target: min - minify built file
+min: dist
+	@uglifyjs ${DIST_FILE} > ${DIST_FILE_MIN}
+	@echo 'target:' $@', using uglifyjs'
+
+#target: lint - run jshint tests
+lint: dist
+	@jshint --config .jshint-conf ${DIST_FILE}
+	@echo 'target:' $@', using jshint'
+
+#target: dist - build from src
+test: dist
+	@node ${TEST_FILES}
+	@echo 'target:' $@', using node and buster.js'	
+
+#target: clean - remove built files
+clean:
+		@rm -f ${DIST_DIR}/*.js
+		@echo 'target:' $@
+
+#target: help - show available targets
+help:
+	@echo 'Available targets:'
+	@egrep "^#target:" [Mm]akefile
