@@ -116,6 +116,7 @@ var isoDateFormat;
   };
 })());
 
+var module, require, exports;
 (function () {
   var toExport = {"isoDateFormat": isoDateFormat};
   (function() {
@@ -123,5 +124,5 @@ var isoDateFormat;
     if (undefinedType!=typeof module && undefinedType != typeof module.exports && "function" == typeof require) {
       for (var name in this) {exports[name] = this[name];}
     }
-  }).call(toExport);
+  }.call(toExport));
 })();

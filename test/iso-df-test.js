@@ -4,6 +4,7 @@
 
 var buster = require("buster");
 var isoDateFormat = require("../build/iso-df").isoDateFormat;
+var assert = buster.assert;
 
 buster.testCase("iso-df::setup", {
   "isoDateFormat should be defined as an object": function () {
@@ -31,21 +32,21 @@ buster.testCase("iso-df::setup", {
   }
   , "test factory method": function () {
     assert.isObject(isoDateFormat.create());
-    
+
     var formatter = isoDateFormat.create(isoDateFormat.date);
     assert.isFunction(formatter.parse);
     assert.isFunction(formatter.format);
-    
+
     formatter = isoDateFormat.create(isoDateFormat.date);
     assert.equals(isoDateFormat.date, formatter.type);
-    
+
     formatter = isoDateFormat.create(isoDateFormat.dateTime);
     assert.equals(isoDateFormat.dateTime, formatter.type);
-    
+
     formatter = isoDateFormat.create();
     assert.equals(isoDateFormat.date, formatter.type);
   }
-  
+
 });
 
 
@@ -166,11 +167,11 @@ buster.testCase("iso-df::format dateOnly", {
           , "expected": "1901-02-28"
         }
       ];
-    
+
     var earlyDate = new Date(0, 0, 1); // created as "1900-01-01" :(
     earlyDate.setFullYear(0); // year 0 now
     attempts.push({"date":earlyDate, "expected": "0000-01-01"});
-    
+
     for (var idx=0, len=attempts.length, attempt; idx<len; ++idx) {
       attempt = attempts[idx];
       assert.equals(attempt.expected, formatter.format(attempt.date));
@@ -202,11 +203,11 @@ buster.testCase("iso-df::format dateOnly", {
           , "expected": "1901-02-28 00:00"
         }
       ];
-    
+
     var earlyDate = new Date(0, 0, 1, 9, 5); // created as "1900-01-01 09:05" :(
     earlyDate.setFullYear(0); // year 0 now
     attempts.push({"date":earlyDate, "expected": "0000-01-01 09:05"});
-    
+
     for (var idx=0, len=attempts.length, attempt; idx<len; ++idx) {
       attempt = attempts[idx];
       assert.equals(attempt.expected, formatter.format(attempt.date));

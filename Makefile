@@ -12,7 +12,7 @@ TEST_DIR = ./test
 TEST_FILES = ${TEST_DIR}/iso-df-test.js
 
 #target: all - clean, build and minify
-all: clean min
+all: clean min test lint
 
 #target: dist - build
 dist: ${SRC}
@@ -24,15 +24,15 @@ min: dist
 	@uglifyjs ${DIST_FILE} > ${DIST_FILE_MIN}
 	@echo 'target:' $@', using uglifyjs'
 
-#target: lint - run jshint tests
+#target: lint - run eslint tests
 lint: dist
-	@jshint --config .jshint-conf ${DIST_FILE}
-	@echo 'target:' $@', using jshint'
+	@eslint --config .eslintrc ${DIST_FILE}
+	@echo 'target:' $@', using eslint'
 
 #target: dist - build from src
 test: dist
 	@node ${TEST_FILES}
-	@echo 'target:' $@', using node and buster.js'	
+	@echo 'target:' $@', using node and buster.js'
 
 #target: clean - remove built files
 clean:

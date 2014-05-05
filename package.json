@@ -1,0 +1,10 @@
+{
+  "name": "pp-attendance-event-attendance",
+  "description": "mockup for teacher event attendance registering",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "buster": "0.7.*"
+    , "eslint": "0.5.*"
+  }
+}
