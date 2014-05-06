@@ -1,8 +1,8 @@
 #!/bin/bash
 SRC = src/iso-df.js
 
-FILE = iso-df.js
-FILE_MIN = iso-df.min.js
+FILE = iso-df.dev.js
+FILE_MIN = iso-df.js
 
 DIST_DIR = ./build
 DIST_FILE = ${DIST_DIR}/${FILE}
@@ -11,7 +11,7 @@ DIST_FILE_MIN = ${DIST_DIR}/${FILE_MIN}
 TEST_DIR = ./test
 TEST_FILES = ${TEST_DIR}/iso-df-test.js
 
-#target: all - clean, build and minify
+#target: all - clean, build/minify, test and lint
 all: clean min test lint
 
 #target: dist - build

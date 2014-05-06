@@ -6,5 +6,6 @@
   "dependencies": {
     "buster": "0.7.*"
     , "eslint": "0.5.*"
+    , "uglify-js" "2.4.*"
   }
 }

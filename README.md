@@ -3,12 +3,19 @@ isoDateFormat
 
 parse/format iso dates/date-times. under construction.
 
-Build
+Checkout and build
 -----
-	targets:
+	
+	$ git clone git@github.com:npup/iso-df.js.git
+	$ cd iso-df.js
+	$ npm install
+	$ make
+
+#### Targets
+
 		`make build`
 		`make min`		# uglifyjs
-		`make lint` 	# jshint
+		`make lint` 	# eslint
 		`make test` 	# buster.js
 
 Usage
