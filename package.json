@@ -1,6 +1,6 @@
 {
-  "name": "pp-attendance-event-attendance",
-  "description": "mockup for teacher event attendance registering",
+  "name": "iso-df.js",
+  "description": "parse/format iso dates/date-times",
   "version": "0.0.1",
   "private": true,
   "dependencies": {
