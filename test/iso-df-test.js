@@ -4,7 +4,7 @@
 
 var buster = require("buster");
 var isoDateFormat = require("../build/iso-df").isoDateFormat;
-var assert = buster.assert;
+var assert = buster.assert, refute = buster.refute;
 
 buster.testCase("iso-df::setup", {
   "isoDateFormat should be defined as an object": function () {
